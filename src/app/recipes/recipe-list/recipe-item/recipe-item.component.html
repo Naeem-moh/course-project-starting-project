@@ -1,0 +1,13 @@
+<a
+  (click)="onClick()"
+  href="#"
+  class="d-flex justify-content-between align-items-center list-group-item my-2"
+>
+  <div>
+    <h4 class="list-group-item">{{ recipe.name }}</h4>
+    <p class="list-group-item">{{ recipe.description }}</p>
+  </div>
+  <div>
+    <img class="" [src]="recipe.imagePath" alt="cordon blue" />
+  </div>
+</a>

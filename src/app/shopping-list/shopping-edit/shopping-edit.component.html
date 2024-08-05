@@ -1,0 +1,38 @@
+<div class="row mt-4">
+  <div class="col-xs-12">
+    <form class="row">
+      <div class="row mb-3 col-sm-4">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+          <input
+            #nameReference
+            type="text"
+            class="form-control"
+            id="inputEmail3"
+          />
+        </div>
+      </div>
+      <div class="row mb-3 col-sm-4">
+        <label for="inputPassword3" class="col-sm-2 col-form-label"
+          >Amount</label
+        >
+        <div class="col-sm-10">
+          <input
+            #amountReference
+            type="number"
+            class="form-control"
+            id="inputPassword3"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex gap-2">
+          <button (click)="addIngredient()" type="submit" class="btn btn-success">Add</button>
+          <button type="button" class="btn btn-danger">Delete</button>
+          <button type="button" class="btn btn-primary">Empty</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div>something</div>
+</div>
