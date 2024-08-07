@@ -2,11 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-recipes *appNgUnless="selection !== 'Recipes'"></app-recipes>
-      <!-- note: ngIf will as a child will receive the true or false -->
-      <app-shopping-list
-        *appNgUnless="selection !== 'Shopping list'"
-      ></app-shopping-list>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

@@ -13,6 +13,8 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { GreenColorDirective } from './directives/green-color.directive';
 import { NgUnlessDirective } from './directives/ng-unless.directive';
 import { RoutingModule } from './router/routing.module';
+import { RecipeDetailsDefaultComponent } from './recipes/recipe-details-default/recipe-details-default.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { RoutingModule } from './router/routing.module';
     ShoppingEditComponent,
     GreenColorDirective,
     NgUnlessDirective,
+    RecipeDetailsDefaultComponent,
+    RecipeEditComponent,
   ],
   imports: [BrowserModule, FormsModule, RoutingModule],
   providers: [],

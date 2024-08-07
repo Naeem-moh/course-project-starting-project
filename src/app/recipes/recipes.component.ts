@@ -9,16 +9,7 @@ import { ArrowFunctionExpr } from '@angular/compiler';
   styleUrl: './recipes.component.css',
 })
 export class RecipesComponent implements OnInit {
-  constructor(private recipesService: RecipesService) {}
+  constructor() {}
 
-  public selectedRecipe: Recipe;
-
-  ngOnInit(): void {
-    this.recipesService.recipeSelected.subscribe(
-      //recipe will be emitted
-      (recipe) => {
-        this.selectedRecipe = recipe;
-      }
-    );
-  }
+  ngOnInit(): void {}
 }
