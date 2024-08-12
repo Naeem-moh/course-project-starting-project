@@ -1,7 +1,8 @@
 import { RecipesService } from './../recipes.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Ingredient } from '../../shared/ingredient.modal';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -27,27 +28,42 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
-  //this function needs to be called every time the params change, so we can't just
   private formInit() {
     let recipeName = '';
     let recipeImage = '';
     let recipeDescription = '';
+    let recipeIngredient = new FormArray([]);
 
     if (this.editMode) {
       let recipe = this.recipesService.getRecipe(this.id);
       recipeName = recipe.name;
       recipeImage = recipe.imagePath;
       recipeDescription = recipe.description;
+      recipe.ingredients.forEach((ingredient: Ingredient) => {
+        recipeIngredient.push(
+          new FormGroup({
+            name: new FormControl(ingredient.name),
+            amount: new FormControl(ingredient.amount),
+          })
+        );
+      });
     }
 
     this.form = new FormGroup({
       name: new FormControl(recipeName),
       imagePath: new FormControl(recipeImage),
       description: new FormControl(recipeDescription),
+      ingredients: recipeIngredient,
     });
+  }
+
+  getArrayControls() {
+    return (<FormArray>this.form.get('ingredients')).controls;
   }
 
   onSubmit() {
     console.log(this.form);
   }
 }
+
+//the names given to the array form controls are the indexes.

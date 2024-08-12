@@ -28,25 +28,42 @@
       s="5"
     ></textarea>
   </div>
-  <div class="row align-items-end">
-    <div class="col-8">
-      <label for="exampleFormControlInput1" class="form-label"
-        >Ingredient</label
-      >
-      <input type="text" class="form-control" id="exampleFormControlInput1" />
-    </div>
-    <div class="col-3">
-      <label for="exampleFormControlInput1" class="form-label">Amount</label>
-      <input type="number" class="form-control" id="exampleFormControlInput1" />
-    </div>
-    <div class="col-1">
-      <button
-        type="button"
-        for="exampleFormControlInput1"
-        class="btn btn-danger"
-      >
-        X
-      </button>
+  <div formArrayName="ingredients" class="row">
+    <h5>Ingredients:</h5>
+    <div
+      class="row align-items-end g-2"
+      *ngFor="let ingredient of getArrayControls(); let index = index"
+      [formGroupName]="index"
+    >
+      <div class="col-8">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Ingredient : {{ index + 1 }}</label
+        >
+        <input
+          formControlName="name"
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput1"
+        />
+      </div>
+      <div class="col-3">
+        <label for="exampleFormControlInput1" class="form-label">Amount</label>
+        <input
+          formControlName="amount"
+          type="number"
+          class="form-control"
+          id="exampleFormControlInput1"
+        />
+      </div>
+      <div class="col-1">
+        <button
+          type="button"
+          for="exampleFormControlInput1"
+          class="btn btn-danger"
+        >
+          X
+        </button>
+      </div>
     </div>
   </div>
   <div class="row g-3 justify-content-evenly">

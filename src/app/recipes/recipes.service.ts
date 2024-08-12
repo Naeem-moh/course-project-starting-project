@@ -13,7 +13,7 @@ export class RecipesService {
       'Cordon blue',
       'Chicken meat filled with white sauce and mushroom',
       'https://th.bing.com/th/id/OIP.y2I_lQzXdZWIL1W07ZjLzwHaF-?rs=1&pid=ImgDetMain',
-      [new Ingredient('mushroom', 4)]
+      [new Ingredient('mushroom', 4), new Ingredient('chicken breast', 2)]
     ),
     new Recipe(
       'Shawarma',
