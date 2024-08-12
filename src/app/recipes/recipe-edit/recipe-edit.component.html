@@ -1,1 +1,56 @@
-<p>recipe-edit works!</p>
+<form class="row" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Name</label>
+    <input
+      formControlName="name"
+      type="text"
+      class="form-control"
+      id="exampleFormControlInput1"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Image URL</label>
+    <input
+      formControlName="imagePath"
+      type="text"
+      class="form-control"
+      id="exampleFormControlInput1"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label"
+      >Description</label
+    >
+    <textarea
+      formControlName="description"
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      s="5"
+    ></textarea>
+  </div>
+  <div class="row align-items-end">
+    <div class="col-8">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Ingredient</label
+      >
+      <input type="text" class="form-control" id="exampleFormControlInput1" />
+    </div>
+    <div class="col-3">
+      <label for="exampleFormControlInput1" class="form-label">Amount</label>
+      <input type="number" class="form-control" id="exampleFormControlInput1" />
+    </div>
+    <div class="col-1">
+      <button
+        type="button"
+        for="exampleFormControlInput1"
+        class="btn btn-danger"
+      >
+        X
+      </button>
+    </div>
+  </div>
+  <div class="row g-3 justify-content-evenly">
+    <button type="submit" class="btn btn-success col-4">Save</button>
+    <button type="button" class="btn btn-danger col-4">Cancel</button>
+  </div>
+</form>

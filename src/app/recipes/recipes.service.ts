@@ -27,4 +27,8 @@ export class RecipesService {
   public get recipes(): Recipe[] {
     return this._recipes.slice();
   }
+
+  getRecipe(index: number) {
+    return this._recipes[index];
+  }
 }

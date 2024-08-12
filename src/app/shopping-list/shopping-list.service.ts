@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { Ingredient } from './../shared/ingredient.modal';
 import { EventEmitter, Injectable } from '@angular/core';
 
@@ -5,14 +6,16 @@ import { EventEmitter, Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ShoppingListService {
-  constructor() {}
-
-  public ingredientAdded = new EventEmitter<Ingredient>();
+  ingredientAdded = new Subject<null>();
+  editSubject$ = new Subject<number>();
 
   private _ingredients: Ingredient[] = [
     new Ingredient('Chicken Breast', 2),
     new Ingredient('Tomato', 3),
   ];
+
+  constructor() {}
+
   public get ingredients(): Ingredient[] {
     return this._ingredients.slice();
   }
@@ -22,5 +25,16 @@ export class ShoppingListService {
   }
   addIngredients(ingredients: Ingredient[]) {
     this._ingredients.push(...ingredients);
+  }
+
+  getIngredient(index: number) {
+    return this._ingredients[index];
+  }
+
+  editIngredient(index: number, newIngredient: Ingredient) {
+    this._ingredients[index] = newIngredient;
+  }
+  deleteIngredient(index: number) {
+    this._ingredients.splice(index, 1);
   }
 }

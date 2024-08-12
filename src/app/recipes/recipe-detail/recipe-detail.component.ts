@@ -29,7 +29,7 @@ export class RecipeDetailComponent implements OnInit {
 
   onClick() {
     this.shoppingListService.addIngredients(this.selectedRecipe.ingredients);
-    this.shoppingListService.ingredientAdded.emit();
+    this.shoppingListService.ingredientAdded.next();
   }
   navigateEdit() {
     this.router.navigate(['edit'], { relativeTo: this.route });
