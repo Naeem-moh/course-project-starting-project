@@ -11,11 +11,13 @@
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Image URL</label>
     <input
+      #image
       formControlName="imagePath"
       type="text"
       class="form-control"
       id="exampleFormControlInput1"
     />
+    <img class="mt-3" style="height: 300px" [src]="image.value" alt="" />
   </div>
   <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label"
@@ -58,6 +60,7 @@
       <div class="col-1">
         <button
           type="button"
+          (click)="onDeleteIngredient(index)"
           for="exampleFormControlInput1"
           class="btn btn-danger"
         >
@@ -65,9 +68,29 @@
         </button>
       </div>
     </div>
+    <div class="row g-2">
+      <div class="col">
+        <button
+          (click)="onAddIngredient()"
+          class="btn btn-success"
+          type="button"
+        >
+          Add
+        </button>
+      </div>
+    </div>
   </div>
-  <div class="row g-3 justify-content-evenly">
-    <button type="submit" class="btn btn-success col-4">Save</button>
-    <button type="button" class="btn btn-danger col-4">Cancel</button>
+  <hr class="mt-3" />
+  <div class="p-3 row justify-content-evenly">
+    <button
+      [disabled]="form.invalid"
+      type="submit"
+      class="btn btn-success col-4"
+    >
+      Save
+    </button>
+    <button routerLink="../" type="button" class="btn btn-danger col-4">
+      Cancel
+    </button>
   </div>
 </form>

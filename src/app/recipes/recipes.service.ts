@@ -1,13 +1,12 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.modal';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipesService {
-  constructor() {}
-
   private _recipes: Recipe[] = [
     new Recipe(
       'Cordon blue',
@@ -22,13 +21,28 @@ export class RecipesService {
       [new Ingredient('tomato', 2)]
     ),
   ];
-  public recipeSelected = new EventEmitter<Recipe>();
+
+  onRecipesEdit$: Subject<null> = new Subject();
 
   public get recipes(): Recipe[] {
     return this._recipes.slice();
   }
 
+  constructor() {}
+
   getRecipe(index: number) {
     return this._recipes[index];
+  }
+
+  addRecipe(newRecipe: Recipe) {
+    this._recipes.push(newRecipe);
+  }
+
+  editRecipe(index: number, newRecipe: Recipe) {
+    this._recipes[index] = newRecipe;
+  }
+
+  deleteRecipe(index: number) {
+    this._recipes.splice(index, 1);
   }
 }

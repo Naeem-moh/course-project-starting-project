@@ -1,12 +1,7 @@
 import { RecipesService } from './../recipes.service';
-import {
-  Component,
-  ViewEncapsulation,
-  Output,
-  EventEmitter,
-  OnInit,
-} from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,12 +9,22 @@ import { Recipe } from '../recipe.model';
   styleUrl: './recipe-list.component.css',
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class RecipeListComponent implements OnInit {
-  constructor(private recipesservies: RecipesService) {}
-
+export class RecipeListComponent implements OnInit, OnDestroy {
   public recipes: Recipe[];
+  public recipesSubscription: Subscription;
+
+  constructor(private recipesService: RecipesService) {}
 
   ngOnInit(): void {
-    this.recipes = this.recipesservies.recipes;
+    this.recipes = this.recipesService.recipes;
+    this.recipesSubscription = this.recipesService.onRecipesEdit$.subscribe(
+      () => {
+        this.recipes = this.recipesService.recipes;
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.recipesSubscription.unsubscribe();
   }
 }

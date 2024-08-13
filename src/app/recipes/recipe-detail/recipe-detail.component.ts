@@ -10,15 +10,15 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrl: './recipe-detail.component.css',
 })
 export class RecipeDetailComponent implements OnInit {
+  selectedRecipe: Recipe;
+  id: number;
+
   constructor(
     private shoppingListService: ShoppingListService,
     private route: ActivatedRoute,
     private recipesService: RecipesService,
     private router: Router
   ) {}
-
-  selectedRecipe: Recipe;
-  id: number;
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -33,5 +33,10 @@ export class RecipeDetailComponent implements OnInit {
   }
   navigateEdit() {
     this.router.navigate(['edit'], { relativeTo: this.route });
+  }
+  onDelete() {
+    this.recipesService.deleteRecipe(this.id);
+    this.recipesService.onRecipesEdit$.next();
+    this.router.navigate(['/']);
   }
 }
