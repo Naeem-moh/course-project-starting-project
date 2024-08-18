@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+src/app/http-test/http-test.component.html
+src/app/http-test/http-test.component.css
+src/app/http-test/http-test.component.ts
+src/app/http-test/log.interceptor.ts
+src/app/http-test/posts.service.ts

@@ -42,8 +42,12 @@
           Manage
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item">Save Data</a></li>
-          <li><a class="dropdown-item"> Fetch data</a></li>
+          <li>
+            <a (click)="onStoreData()" class="dropdown-item">Save Data</a>
+          </li>
+          <li>
+            <a (click)="onFetchData()" class="dropdown-item"> Fetch data</a>
+          </li>
         </ul>
       </div>
     </div>
