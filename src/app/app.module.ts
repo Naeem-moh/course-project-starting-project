@@ -16,9 +16,10 @@ import { NgUnlessDirective } from './directives/ng-unless.directive';
 import { RoutingModule } from './router/routing.module';
 import { RecipeDetailsDefaultComponent } from './recipes/recipe-details-default/recipe-details-default.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { HttpTestComponent } from './http-test/http-test.component';
+//import { HttpTestComponent } from './http-test/http-test.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { LogInterceptor } from './http-test/log.interceptor';
+import { AuthComponent } from './auth/auth.component';
+//import { LogInterceptor } from './http-test/log.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { LogInterceptor } from './http-test/log.interceptor';
     NgUnlessDirective,
     RecipeDetailsDefaultComponent,
     RecipeEditComponent,
-    HttpTestComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,

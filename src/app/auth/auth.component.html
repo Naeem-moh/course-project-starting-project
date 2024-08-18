@@ -1,0 +1,33 @@
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      ngModel
+      name="email"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="exampleInputPassword1"
+      ngModel
+      name="password"
+      required
+      minlength="6"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    {{ loginMode ? "Login" : "Sign Up" }}
+  </button>
+  |
+  <button class="btn btn-primary" type="button" (click)="switchMode()">
+    Switch to {{ loginMode ? "Sign Up" : "Login" }}
+  </button>
+</form>

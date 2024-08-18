@@ -7,10 +7,12 @@ import { RecipeDetailsDefaultComponent } from '../recipes/recipe-details-default
 import { RecipeEditComponent } from '../recipes/recipe-edit/recipe-edit.component';
 //import { HttpTestComponent } from '../http-test/http-test.component';
 import { RecipesResolver } from '../recipes/recipes.resolver';
+import { AuthComponent } from '../auth/auth.component';
 
 const routerConfig: Routes = [
   //{ path: 'test', component: HttpTestComponent },
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+  { path: 'auth', component: AuthComponent },
   {
     path: 'recipes',
     component: RecipesComponent,
