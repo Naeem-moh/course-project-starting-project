@@ -45,3 +45,8 @@ src/app/test/test.component.ts
 src/app/test/test.component.html
 src/app/test/post.model.ts
 src/app/test/posts.service.ts
+src/app/http-test/http-test.component.html
+src/app/http-test/http-test.component.css
+src/app/http-test/http-test.component.ts
+src/app/http-test/log.interceptor.ts
+src/app/http-test/posts.service.ts
