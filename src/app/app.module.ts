@@ -19,6 +19,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 //import { HttpTestComponent } from './http-test/http-test.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 //import { LogInterceptor } from './http-test/log.interceptor';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { AuthComponent } from './auth/auth.component';
     RecipeDetailsDefaultComponent,
     RecipeEditComponent,
     AuthComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
