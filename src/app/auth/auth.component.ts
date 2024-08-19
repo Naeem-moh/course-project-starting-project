@@ -1,6 +1,8 @@
+import { HttpResponse } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -25,24 +27,29 @@ export class AuthComponent {
 
     const email = form.value.email;
     const password = form.value.password;
+    let authObs$: Observable<any>;
 
     this.isLoading = true;
     this.error = null;
     if (this.loginMode) {
-      //...
+      // The following is a really nice trick! create an variable and insert multi values in it to handle the same code to who ever is inside.
+
+      authObs$ = this.authService.singIn(email, password);
     } else {
-      this.authService.signUp(email, password).subscribe(
-        (res) => {
-          console.log(res);
-          this.isLoading = false;
-        },
-        (error) => {
-          console.log(error);
-          this.isLoading = false;
-          this.error = error.message;
-        }
-      );
+      authObs$ = this.authService.signUp(email, password);
     }
+
+    authObs$.subscribe(
+      (res) => {
+        console.log(res);
+        this.isLoading = false;
+      },
+      (errorMessage) => {
+        //this handler should only be concerned with the final error message related to the UI!
+        this.isLoading = false;
+        this.error = errorMessage;
+      }
+    );
 
     form.reset();
   }
