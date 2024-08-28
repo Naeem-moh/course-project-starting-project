@@ -86,7 +86,6 @@ export class AuthService {
     const expirationDate = new Date(
       new Date().getTime() + +userData.expiresIn * 1000
     );
-    console.log(expirationDate);
 
     const user: User = new User(
       userData.email,
@@ -96,5 +95,24 @@ export class AuthService {
     );
     console.log(user);
     this.user$.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+  autoLog(): void {
+    //this is not a user object, it's a parsed object with no methods cause they are not enumerable.
+    const userData = JSON.parse(localStorage.getItem('userData'));
+
+    if (!userData) return;
+
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+
+    if (!loadedUser.token) return;
+
+    this.user$.next(loadedUser);
   }
 }
