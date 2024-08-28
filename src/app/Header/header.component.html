@@ -46,7 +46,7 @@
       </ul>
       <div class="d-flex me-5">
         <div *ngIf="isAuthenticated" class="nav-item ms-auto me-4">
-          <a>Logout</a>
+          <a (click)="onLogout()">Logout</a>
         </div>
         <div *ngIf="isAuthenticated" class="nav-item dropdown ms-auto me-5">
           <a
