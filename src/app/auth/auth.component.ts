@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -14,7 +15,7 @@ export class AuthComponent {
   isLoading = false;
   error = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   switchMode() {
     this.loginMode = !this.loginMode;
@@ -33,7 +34,6 @@ export class AuthComponent {
     this.error = null;
     if (this.loginMode) {
       // The following is a really nice trick! create an variable and insert multi values in it to handle the same code to who ever is inside.
-
       authObs$ = this.authService.singIn(email, password);
     } else {
       authObs$ = this.authService.signUp(email, password);
@@ -43,6 +43,7 @@ export class AuthComponent {
       (res) => {
         console.log(res);
         this.isLoading = false;
+        this.router.navigate(['/recipes']);
       },
       (errorMessage) => {
         //this handler should only be concerned with the final error message related to the UI!

@@ -12,9 +12,12 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div
+      class="collapse navbar-collapse d-flex justify-content-between"
+      id="navbarNavDropdown"
+    >
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li *ngIf="!isAuthenticated" class="nav-item">
           <a
             routerLink="/auth"
             routerLinkActive="active"
@@ -23,7 +26,7 @@
             >Authenticate</a
           >
         </li>
-        <li class="nav-item">
+        <li *ngIf="isAuthenticated" class="nav-item">
           <a
             routerLink="/recipes"
             routerLinkActive="active"
@@ -41,23 +44,28 @@
           >
         </li>
       </ul>
-      <div class="nav-item dropdown ms-auto me-5 pe-5">
-        <a
-          class="nav-link dropdown-toggle"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Manage
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a (click)="onStoreData()" class="dropdown-item">Save Data</a>
-          </li>
-          <li>
-            <a (click)="onFetchData()" class="dropdown-item"> Fetch data</a>
-          </li>
-        </ul>
+      <div class="d-flex me-5">
+        <div *ngIf="isAuthenticated" class="nav-item ms-auto me-4">
+          <a>Logout</a>
+        </div>
+        <div *ngIf="isAuthenticated" class="nav-item dropdown ms-auto me-5">
+          <a
+            class="nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Manage
+          </a>
+          <ul class="dropdown-menu">
+            <li style="width: fit-content !important">
+              <a (click)="onStoreData()" class="dropdown-item">Save Data</a>
+            </li>
+            <li style="width: fit-content !important">
+              <a (click)="onFetchData()" class="dropdown-item"> Fetch data</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

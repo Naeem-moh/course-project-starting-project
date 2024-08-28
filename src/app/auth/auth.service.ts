@@ -4,18 +4,21 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  user$ = new BehaviorSubject<User>(null);
+
   constructor(private http: HttpClient) {}
 
   signUp(email: string, password: string) {
     return this.http
-      .post(
+      .post<any>(
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDAkPcSwskfAlLwWK15g_E4VP7X9cBXbqA',
         {
           email: email,
@@ -23,7 +26,10 @@ export class AuthService {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError(this.errorHandle));
+      .pipe(
+        catchError(this.errorHandle),
+        tap(this.handleAuthentication.bind(this))
+      );
   }
 
   singIn(email: string, password: string) {
@@ -36,10 +42,13 @@ export class AuthService {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError(this.errorHandle));
+      .pipe(
+        catchError(this.errorHandle),
+        tap(this.handleAuthentication.bind(this))
+      );
   }
 
-  errorHandle(error) {
+  private errorHandle(error) {
     console.log(error);
     let errorMessage = 'Unknown Error Occurred';
 
@@ -64,5 +73,22 @@ export class AuthService {
 
     //need to return cause this is an observable
     return throwError(errorMessage);
+  }
+
+  private handleAuthentication(userData) {
+    // At this point we are 100% sure we have the user data cause the server will not response with 200 and angular will not ignore a network error if everything is not totally fine.
+    const expirationDate = new Date(
+      new Date().getTime() + +userData.expiresIn * 1000
+    );
+    console.log(expirationDate);
+
+    const user: User = new User(
+      userData.email,
+      userData.localId,
+      userData.idToken,
+      expirationDate
+    );
+    console.log(user);
+    this.user$.next(user);
   }
 }

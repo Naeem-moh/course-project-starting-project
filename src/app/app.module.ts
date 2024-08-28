@@ -20,6 +20,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 //import { LogInterceptor } from './http-test/log.interceptor';
 
 @NgModule({
@@ -48,6 +49,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
   ],
   providers: [
     //{ provide: HTTP_INTERCEPTORS, useClass: LogInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
