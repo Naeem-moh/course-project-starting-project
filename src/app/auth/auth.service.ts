@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   user$ = new BehaviorSubject<User>(null);
+  tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -52,6 +53,18 @@ export class AuthService {
   logout() {
     this.user$.next(null);
     this.router.navigate(['auth']);
+    localStorage.removeItem('userData');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+      this.tokenExpirationTimer = null;
+    }
+  }
+
+  autoLogout(tokenExpirationDate: number) {
+    // what will happen if the user logs out before the timer is finished?
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, tokenExpirationDate);
   }
 
   private errorHandle(error) {
@@ -96,6 +109,7 @@ export class AuthService {
     console.log(user);
     this.user$.next(user);
     localStorage.setItem('userData', JSON.stringify(user));
+    this.autoLogout(userData.expiresIn * 1000);
   }
 
   autoLog(): void {
@@ -114,5 +128,9 @@ export class AuthService {
     if (!loadedUser.token) return;
 
     this.user$.next(loadedUser);
+
+    this.autoLogout(
+      new Date(userData._tokenExpirationDate).getTime() - new Date().getTime()
+    );
   }
 }

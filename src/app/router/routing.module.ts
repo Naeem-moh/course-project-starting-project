@@ -8,6 +8,7 @@ import { RecipeEditComponent } from '../recipes/recipe-edit/recipe-edit.componen
 //import { HttpTestComponent } from '../http-test/http-test.component';
 import { RecipesResolver } from '../recipes/recipes.resolver';
 import { AuthComponent } from '../auth/auth.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 const routerConfig: Routes = [
   //{ path: 'test', component: HttpTestComponent },
@@ -15,6 +16,7 @@ const routerConfig: Routes = [
   { path: 'auth', component: AuthComponent },
   {
     path: 'recipes',
+    canActivate: [AuthGuard],
     component: RecipesComponent,
     children: [
       { path: 'new', component: RecipeEditComponent },
