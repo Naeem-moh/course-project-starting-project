@@ -1,4 +1,5 @@
-<div class="alert alert-danger my-3" *ngIf="error">{{ error }}</div>
+<!-- <div class="alert alert-danger my-3" *ngIf="error">{{ error }}</div> -->
+<app-alert [message]="error" (close)="handleClose()" *ngIf="error"></app-alert>
 <div
   *ngIf="isLoading"
   class="d-flex align-items-center justify-content-center"
