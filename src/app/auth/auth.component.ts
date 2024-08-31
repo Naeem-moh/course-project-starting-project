@@ -1,9 +1,11 @@
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { AlertComponent } from '../shared/alert/alert.component';
+import { PlaceholderDirective } from '../shared/placeholder.directive';
 
 @Component({
   selector: 'app-auth',
@@ -14,8 +16,15 @@ export class AuthComponent {
   loginMode = true;
   isLoading = false;
   error = null;
+  closeAlertSub: Subscription;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private componentFactoryResolver: ComponentFactoryResolver // Deprecated, we can pass the class reference directly.
+  ) {}
 
   switchMode() {
     this.loginMode = !this.loginMode;
@@ -48,7 +57,8 @@ export class AuthComponent {
       (errorMessage) => {
         //this handler should only be concerned with the final error message related to the UI!
         this.isLoading = false;
-        this.error = errorMessage;
+        //this.error = errorMessage;
+        this.showErrorMessage(errorMessage);
       }
     );
 
@@ -57,5 +67,22 @@ export class AuthComponent {
 
   handleClose() {
     this.error = null;
+  }
+
+  showErrorMessage(message: string) {
+    //! this is the older approach but now no need to create a factory !
+    // const alertComponentFactory =
+    //   this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
+
+    //*new approach */
+    this.alertHost.VRC.clear();
+    const alertComponent = this.alertHost.VRC.createComponent(AlertComponent);
+
+    alertComponent.instance.message = message;
+
+    this.closeAlertSub = alertComponent.instance.close.subscribe(() => {
+      this.alertHost.VRC.clear();
+      this.closeAlertSub.unsubscribe();
+    });
   }
 }

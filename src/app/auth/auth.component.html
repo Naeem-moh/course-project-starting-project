@@ -1,4 +1,5 @@
 <!-- <div class="alert alert-danger my-3" *ngIf="error">{{ error }}</div> -->
+<ng-template appPlaceholder></ng-template>
 <app-alert [message]="error" (close)="handleClose()" *ngIf="error"></app-alert>
 <div
   *ngIf="isLoading"
