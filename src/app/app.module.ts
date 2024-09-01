@@ -5,10 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Header/header.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
+
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { GreenColorDirective } from './directives/green-color.directive';
@@ -23,22 +20,19 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AlertComponent } from './shared/alert/alert.component';
 import { PlaceholderDirective } from './shared/placeholder.directive';
+import { RecipesModule } from './recipes/recipes.module';
 //import { LogInterceptor } from './http-test/log.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    RecipeItemComponent,
+
     ShoppingListComponent,
     ShoppingEditComponent,
     GreenColorDirective,
     NgUnlessDirective,
-    RecipeDetailsDefaultComponent,
-    RecipeEditComponent,
+
     AuthComponent,
     LoadingSpinnerComponent,
     AlertComponent,
@@ -50,6 +44,7 @@ import { PlaceholderDirective } from './shared/placeholder.directive';
     RoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RecipesModule,
   ],
   providers: [
     //{ provide: HTTP_INTERCEPTORS, useClass: LogInterceptor, multi: true },

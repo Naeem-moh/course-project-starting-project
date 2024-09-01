@@ -4,35 +4,14 @@ import { RecipesComponent } from '../recipes/recipes.component';
 import { ShoppingListComponent } from '../shopping-list/shopping-list.component';
 import { RecipeDetailComponent } from '../recipes/recipe-detail/recipe-detail.component';
 import { RecipeDetailsDefaultComponent } from '../recipes/recipe-details-default/recipe-details-default.component';
-import { RecipeEditComponent } from '../recipes/recipe-edit/recipe-edit.component';
+
 //import { HttpTestComponent } from '../http-test/http-test.component';
-import { RecipesResolver } from '../recipes/recipes.resolver';
 import { AuthComponent } from '../auth/auth.component';
-import { AuthGuard } from '../auth/auth.guard';
 
 const routerConfig: Routes = [
   //{ path: 'test', component: HttpTestComponent },
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
   { path: 'auth', component: AuthComponent },
-  {
-    path: 'recipes',
-    canActivate: [AuthGuard],
-    component: RecipesComponent,
-    children: [
-      { path: 'new', component: RecipeEditComponent },
-      {
-        path: ':id',
-        component: RecipeDetailComponent,
-        resolve: [RecipesResolver],
-      },
-      {
-        path: ':id/edit',
-        component: RecipeEditComponent,
-        resolve: [RecipesResolver],
-      },
-      { path: '', component: RecipeDetailsDefaultComponent },
-    ],
-  },
   { path: 'shopping-list', component: ShoppingListComponent },
 ];
 
