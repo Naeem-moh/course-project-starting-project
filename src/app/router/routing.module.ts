@@ -1,23 +1,35 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { RecipesComponent } from '../recipes/recipes.component';
-import { ShoppingListComponent } from '../shopping-list/shopping-list.component';
-import { RecipeDetailComponent } from '../recipes/recipe-detail/recipe-detail.component';
-import { RecipeDetailsDefaultComponent } from '../recipes/recipe-details-default/recipe-details-default.component';
-
-//import { HttpTestComponent } from '../http-test/http-test.component';
-import { AuthComponent } from '../auth/auth.component';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routerConfig: Routes = [
-  //{ path: 'test', component: HttpTestComponent },
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-  { path: 'auth', component: AuthComponent },
-  { path: 'shopping-list', component: ShoppingListComponent },
+  {
+    path: 'recipes',
+    loadChildren: () =>
+      import('../recipes/recipes.module').then((b) => b.RecipesModule),
+  },
+  {
+    path: 'shopping-list',
+    loadChildren: () =>
+      import('../shopping-list/shopping-list.module').then(
+        (b) => b.ShoppingListModule
+      ),
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('../auth/auth.module').then((b) => b.AuthModule),
+  },
 ];
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routerConfig)],
+  imports: [
+    RouterModule.forRoot(routerConfig, {
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class RoutingModule {}
+
+//don't ask some useless about what doesn't have a clue about
